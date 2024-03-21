@@ -1,0 +1,91 @@
+;================================ TRANSPORTS ==
+
+; Definícia primárneho transportu pre komunikáciu UDP za NAT.
+[transport-udp-nat]
+type = transport
+protocol = udp
+bind = 0.0.0.0
+; Nastavenia NAT
+local_net = 172.17.0.0/24
+external_media_address = 10.100.0.46
+external_signaling_address = 10.100.0.46
+
+; Definícia interného koncového bodu.
+[endpoint-internal](!)
+type=endpoint
+direct_media=no
+allow=!all,alaw
+context=from-internal
+
+; Definícia autentifikácie typu "userpass".
+[auth-userpass](!)
+type=auth
+auth_type=userpass
+
+; Definícia adresy registrátora typu "aor".
+[aor-internal](!)
+type=aor
+max_contacts=3
+qualify_frequency=60
+
+; Konfigurácia koncového bodu pre používateľa s identifikátorom "10".
+[10](endpoint-internal)
+auth=10
+aors=10
+
+; Autentifikácia používateľa "10".
+[10](auth-userpass)
+username=10
+password=10
+
+; Adresa registrátora pre používateľa "10".
+[10](aor-internal)
+
+; Konfigurácia koncového bodu pre používateľa s identifikátorom "11".
+[11](endpoint-internal)
+auth=11
+aors=11
+
+; Autentifikácia používateľa "11".
+[11](auth-userpass)
+username=11
+password=11
+
+; Adresa registrátora pre používateľa "11".
+[11](aor-internal)
+
+; Konfigurácia koncového bodu pre používateľa s identifikátorom "u54".
+[u54]
+type=endpoint
+context=from-trunk
+direct_media=no
+allow=!all,alaw
+auth=u54
+aors=u54
+outbound_auth=u46
+
+; Autentifikácia pre používateľa "u54".
+[u54]
+type=auth
+auth_type=userpass
+username=u54
+password=u54
+
+; Autentifikácia pre používateľa "u46".
+[u46]
+type=auth
+auth_type=userpass
+username=u46
+password=u46
+
+; Adresa registrátora pre používateľa "u54".
+[u54]
+type=aor
+contact=sip:10.100.0.54
+qualify_frequency=60
+
+; Identifikácia pre používateľa "u54" s adresou "10.100.0.54".
+[u54]
+type=identify
+match=10.100.0.54
+endpoint=u54

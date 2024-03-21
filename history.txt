@@ -1,0 +1,117 @@
+ cd voip/
+    2  ls
+    3  cd asterisk/
+    4  ls
+    5  cd ..
+    6  nano Dockerfile
+    7  docker ps
+    8  docker run -d --name asterisk -p 5060:5060/udp -p 10000-10100:10000-10100/udp -v $(pwd)/asterisk:/etc/asterisk jbernat/asterisk
+    9  docker container rm asterisk
+   10  docker run -d --name asterisk -p 5060:5060/udp -p 10000-10100:10000-10100/udp -v $(pwd)/asterisk:/etc/asterisk jbernat/asterisk
+   28  nano Dockerfile
+   29  ip a
+   30  docker container rm asterisk
+   31  docker run -d --name asterisk -p 5060:5060/udp -p 10000-10100:10000-10100/udp jbernat/asterisk
+   32  docker ps
+   33  docker ps
+   34  docker ps
+   35  docker ps
+   36  docker ps
+   37  docker ps
+   38  docker ps
+   39  rm Dockerfile
+   40  nano Dockerfile
+   41  docker container rm asterisk
+   42  docker run -d --name asterisk -p 5060:5060/udp -p 10000-10100:10000-10100/udp jbernat/asterisk
+   43  docker ps
+   44  docker ps
+   45  docker ps
+   46  docker ps
+   47  docker ps
+   48  docker ps
+   49  docker ps
+   50  docker ps
+   51  docker ps
+   52  docker ps
+   53  docker ps
+   54  docker ps
+   55  docker container rm asterisk
+   56  docker run -d --name asterisk jbernat/asterisk
+   57  docker ps
+   58  docker ps
+   59  docker ps
+   60  docker ps
+   61  docker ps
+   62  docker ps
+   63  docker ps
+   64  docker ps
+   65  docker run -d --name asterisk jbernat/asterisk
+   66  docker ps
+   67  docker ps
+   68  nano Dockerfile
+   69  docker ps
+   70  docker logs asterisk
+   71  rm Dockerfile
+   72  nano Dockerfile
+   73  docker container rm asterisk
+   74  docker run -d --name asterisk jbernat/asterisk
+   81  why
+   82  docker build -t jbernat/asterisk .
+   83  docker build -t jbernat/asterisk .
+   84  docker run -d --name asterisk -p 5060:5060/udp -p 10000-10100:10000-10100/udp jbernat/asterisk
+   85  docker container rm asterisk
+   86  docker run -d --name asterisk -p 5060:5060/udp -p 10000-10100:10000-10100/udp jbernat/asterisk
+  119  docker exec -it asterisk /bin/bash
+  120  docker copy /etc/asterisk:/voip/asterisk
+  121  docker --help
+  122  docker cp /etc/asterisk:/voip/asterisk
+  123  docker cp --help
+  124  docker cp asterisk:/etc/asterisk .
+  125  ls
+  126  cd asterisk/
+  127  ls
+  128  nano modules.conf
+  129  rm modules.conf
+  130  nano modules.conf
+  131  nano modules.conf
+  132  chmod 777 /voip
+  133  cd ..
+  134  chmod 777 voip
+  135  cd ..
+  136  chmod 777 voip
+  137  cd voip/
+  138  ls
+  139  rm Dockerfile
+  140  nano Dockerfile
+  141  docker container rm asterisk
+  142  docker stop asterisk
+  143  docker container rm asterisk
+  144  history
+  145  docker build -t jbernat/asterisk2 .
+  146  docker ps
+  147  docker run -d --name asterisk -p 5060:5060/udp -p 10000-10100:10000-10100/udp -v $(pwd)/asterisk:/etc/asterisk jbernat/asterisk2
+  148  docker ps
+
+  182  clear
+  183  cd asterisk/
+  184  ls
+  185  nano pjsip.conf
+  186  rm pjsip.conf
+  187  nano pjsip.conf
+  188  nano extensions.conf
+  189  rm extensions.conf
+  190  nano extensions.conf
+  191  nano pjsip.conf
+  192  ip a
+  193  nano pjsip.conf
+  194  nano pjsip.conf
+  195  docker exec -it asterisk2 /bin/bash
+  196  docker exec -it asterisk /bin/bash
+  197  docker stop asterisk
+  198  docker exec -it asterisk /bin/bash
+  199  docker start asterisk
+  200  docker exec -it asterisk /bin/bash
+  201  ls
+  202  nano extensions.conf
+  203  nano extensions.conf
+  204  history

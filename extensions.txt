@@ -1,0 +1,27 @@
+[from-internal]
+Tento blok definuje kontext pre vnútorné hovory.
+
+exten => 16,1,Answer()
+  same =>   n,Echo()
+  same =>   n,Hangup()
+Pre číslo 16: Na začiatku hovoru zavolá funkciu Answer() na prijatie hovoru, potom zavolá funkciu Echo() na vytvorenie ozveny a nakoniec ukončí hovor pomocou Hangup().
+
+exten => _1[01],1,Dial(PJSIP/${EXTEN})
+  same =>   n,Hangup()
+Pre čísla začínajúce na 10 alebo 11: Zavolá funkciu Dial() na zavolanie čísla prostredníctvom PJSIP a potom ukončí hovor pomocou Hangup().
+
+exten => _4[1,2,3,4,5,7,8,9]1X,1,Set(CALLERID(num)=46${CALLERID(num)})
+  same =>   n,Dial(PJSIP/${EXTEN}@u54)
+  same =>   n,Hangup()
+Pre čísla začínajúce na 41, 42, 43, 44, 45, 47, 48 alebo 49 s nasledujúcou x: Nastaví volajúce číslo na začiatku na 46, potom zavolá číslo prostredníctvom PJSIP na server u54 a nakoniec ukončí hovor.
+
+exten => _541X,1,Set(CALLERID(num)=46${CALLERID(num)})
+  same =>   n,Dial(PJSIP/${EXTEN}@u54)
+  same =>   n,Hangup()
+Pre čísla začínajúce na 541 s nasledujúcou x: Nastaví volajúce číslo na začiatku na 46, potom zavolá číslo prostredníctvom PJSIP na server u54 a nakoniec ukončí hovor.
+
+[from-trunk]
+Tento blok definuje kontext pre prichádzajúce hovory.
+
+exten => _461[01],1,Dial(PJSIP/${EXTEN:2})
+  same =>   n,Hangup()
