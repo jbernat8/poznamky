@@ -1,0 +1,78 @@
+COMPOSE_____________________________________________________________________________________________
+
+version: '3.9'
+
+services:
+
+  asterisk_management:
+    build:
+      context: ./asterisk_management
+      args:
+        - db_url=postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@database:5432/$POSTGRES_DB
+    depends_on:
+      - database
+    volumes:
+      - ./asterisk_management/etc/asterisk:/etc/asterisk
+      - ./asterisk_management/etc/odbc.ini:/etc/odbc.ini
+      - ./asterisk_management/etc/odbcinst.ini:/etc/odbcinst.ini
+    expose:
+      - 5038
+      - 5060
+      - 10000-10100
+    ports:
+      - 5038:5038
+      - 5060:5060/UDP
+      - 10000-10100:10000-10100/UDP
+    networks:
+      - net
+
+  database:
+    build:
+      context: ./postgres
+    expose:
+      - 5432
+    # enable access to postgres externally (possibly for backups)
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+      - POSTGRES_DB=$POSTGRES_DB
+      - DB_USER=$DB_USER
+      - DB_PASS=$DB_PASS
+    volumes:
+      - /database:/var/lib/postgresql/data
+    networks:
+      - net
+
+  asterisk_echo:
+    build:
+      context: ./asterisk_echo
+    volumes:
+      - ./asterisk_echo/etc/asterisk:/etc/asterisk
+      - ./asterisk_echo/etc/odbc.ini:/etc/odbc.ini
+      - ./asterisk_echo/etc/odbcinst.ini:/etc/odbcinst.ini
+    expose:
+      - 5039
+      - 5061/UDP
+      - 10101-10200/UDP
+    networks:
+      - net
+
+  asterisk_playback:
+    build:
+      context: ./asterisk_playback
+    volumes:
+      - ./asterisk_playback/etc/asterisk:/etc/asterisk
+      - ./asterisk_playback/etc/odbc.ini:/etc/odbc.ini
+      - ./asterisk_playback/etc/odbcinst.ini:/etc/odbcinst.ini
+    expose:
+      - 5040
+      - 5062/UDP
+      - 10201-10300/UDP
+    networks:
+      - net
+
+networks:
+  net:
+
